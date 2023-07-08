@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { getArticles } from "../Services/apiService";
+import Container from "react-bootstrap/Container";
 
-function SearchForm({ handleClose }) {
+function SearchForm({ handleClose, sumbitData, setSumbitData }) {
   const [articlesSortDisabled, setArticlesSortDisabled] = useState(false);
 
   const resultType = [
@@ -47,6 +49,7 @@ function SearchForm({ handleClose }) {
   const handleSumbit = (event) => {
     event.preventDefault();
     console.log("event", event.target.keyword.value);
+
     const data = {
       keyword: event.target.keyword.value,
       resultType: event.target.resultType.value,
@@ -60,7 +63,11 @@ function SearchForm({ handleClose }) {
       dateStart: event.target.dateStart.value,
       dateEnd: event.target.dateEnd.value,
     };
+    setSumbitData(data);
     console.log("data", data);
+
+    getArticles(data).then((res) => console.log("res", res));
+
     handleClose();
   };
   const handleResultTypeChange = (event) => {
@@ -75,7 +82,11 @@ function SearchForm({ handleClose }) {
     <Form onSubmit={handleSumbit}>
       <Form.Group className="mb-3">
         <Form.Label>Keywords</Form.Label>
-        <Form.Control type="text" name="keyword" />
+        <Form.Control
+          type="text"
+          name="keyword"
+          defaultValue={sumbitData?.keyword}
+        />
       </Form.Group>
 
       <Form.Group>
@@ -84,6 +95,7 @@ function SearchForm({ handleClose }) {
           className="mb-3"
           name="resultType"
           onChange={handleResultTypeChange}
+          defaultValue={sumbitData?.resultType}
         >
           {resultType.map((type) => (
             <option value={type} key={type}>
@@ -91,12 +103,13 @@ function SearchForm({ handleClose }) {
             </option>
           ))}
         </Form.Select>
-        <Form.Label>Arcticles sort by</Form.Label>
 
+        <Form.Label>Arcticles sort by</Form.Label>
         <Form.Select
           className="mb-3"
           name="articlesSortBy"
           disabled={articlesSortDisabled}
+          defaultValue={sumbitData?.articlesSortBy}
         >
           {articlesSortBy.map((type) => (
             <option value={type} key={type}>
@@ -107,12 +120,20 @@ function SearchForm({ handleClose }) {
 
         <Form.Group className="mb-3">
           <Form.Label>Date start</Form.Label>
-          <Form.Control type="date" name="dateStart" />
+          <Form.Control
+            type="date"
+            name="dateStart"
+            defaultValue={sumbitData?.dateStart}
+          />
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label>Date end</Form.Label>
-          <Form.Control type="date" name="dateEnd" />
+          <Form.Control
+            type="date"
+            name="dateEnd"
+            defaultValue={sumbitData?.dateEnd}
+          />
         </Form.Group>
 
         <Form.Group className="mb-3">
@@ -121,15 +142,17 @@ function SearchForm({ handleClose }) {
             <Form.Check
               value={type}
               type="checkbox"
+              defaultChecked={sumbitData?.dataType.includes(type)}
               label={type}
               key={type}
               name="dataType"
             ></Form.Check>
           ))}
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label>Language</Form.Label>
-          <Form.Select name="lang" multiple>
+          <Form.Select name="lang" multiple defaultValue={sumbitData?.lang}>
             {languages.map(({ value, label }) => (
               <option value={value} key={value}>
                 {label}
@@ -138,9 +161,11 @@ function SearchForm({ handleClose }) {
           </Form.Select>
         </Form.Group>
 
-        <Button type="submit" variant="outline-danger">
-          Close sidebar
-        </Button>
+        <Container className="d-flex justify-content-end align-items-center">
+          <Button type="submit" variant="dark" className="w-100">
+            Search
+          </Button>
+        </Container>
       </Form.Group>
     </Form>
   );
