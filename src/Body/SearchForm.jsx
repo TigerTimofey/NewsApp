@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { getArticles } from "../Services/apiService";
 import Container from "react-bootstrap/Container";
 
-function SearchForm({ handleClose, sumbitData, setSumbitData }) {
+function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
   const [articlesSortDisabled, setArticlesSortDisabled] = useState(false);
 
   const resultType = [
@@ -77,6 +77,32 @@ function SearchForm({ handleClose, sumbitData, setSumbitData }) {
       setArticlesSortDisabled(false);
     }
   };
+
+  //   const handleClear = (event) => {
+  //     event.preventDefault();
+
+  //     const form = event.target.closest("form");
+  //     const inputs = form.getElementsByTagName("input");
+  //     const selects = form.getElementsByTagName("select");
+  //     const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+
+  //     for (let i = 0; i < inputs.length; i++) {
+  //       const input = inputs[i];
+  //       if (input.type !== "submit") {
+  //         input.value = "";
+  //       }
+  //     }
+
+  //     for (let i = 0; i < selects.length; i++) {
+  //       const select = selects[i];
+  //       select.selectedIndex = 0;
+  //     }
+
+  //     for (let i = 0; i < checkboxes.length; i++) {
+  //       const checkbox = checkboxes[i];
+  //       checkbox.checked = false;
+  //     }
+  //   };
 
   return (
     <Form onSubmit={handleSumbit}>
@@ -162,7 +188,15 @@ function SearchForm({ handleClose, sumbitData, setSumbitData }) {
         </Form.Group>
 
         <Container className="d-flex justify-content-end align-items-center">
-          <Button type="submit" variant="dark" className="w-100">
+          <Button
+            onClick={handleClear}
+            type="submit"
+            variant="danger"
+            className="w-100 me-1"
+          >
+            Clear
+          </Button>
+          <Button type="submit" variant="success" className="w-100 ms-1">
             Search
           </Button>
         </Container>
