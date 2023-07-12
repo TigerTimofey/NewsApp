@@ -6,8 +6,8 @@ export const defaultData = {
   keyword: "Harry Styles",
   resultType: "articles",
   articlesSortBy: "date",
-  dataType: ["news", "blog"],
-  lang: ["eng", "est"],
+  dataType: "news",
+  lang: "eng",
   dateStart: "2023-06-01",
 };
 export const clearData = {
@@ -20,8 +20,8 @@ export const clearData = {
   dateEnd: "",
 };
 
-export async function getArticles(params) {
-  const urlParams = new URLSearchParams({ ...params, apiKey });
+export async function getArticles(params = null) {
+  const urlParams = new URLSearchParams({ ...(params || defaultData), apiKey });
   const response = await fetch(`${apiUrl}/article/getArticles?${urlParams}`);
   return await response.json();
 }
