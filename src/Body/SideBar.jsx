@@ -18,8 +18,12 @@ function SideBar() {
 
   return (
     <>
-      <Container className="d-flex justify-content-center align-items-center">
-        <Button variant="dark" className="my-4" onClick={handleShow}>
+      <Container className="sticky-top d-flex justify-content-end align-items-center">
+        <Button
+          variant="secondary"
+          className="mb-3 mt-2 w-10"
+          onClick={handleShow}
+        >
           Search
         </Button>
       </Container>

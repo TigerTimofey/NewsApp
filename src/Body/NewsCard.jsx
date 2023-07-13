@@ -9,7 +9,9 @@ function NewsCard({ news }) {
       <Card onClick={() => setShowModal(true)}>
         <Card.Img variant="top" src={news?.image} />
         <Card.Body>
-          <Card.Title>{news.title}</Card.Title>
+          <Card.Title>
+            <h6>{news.title}</h6>
+          </Card.Title>
           <Card.Text>
             {news.authors?.map((author, idx) => (
               <span key={idx}>

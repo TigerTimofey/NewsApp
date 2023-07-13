@@ -17,9 +17,9 @@ function NewsModal({ handleClose, news }) {
           id="contained-modal-title-vcenter"
           className="w-100 ms-1 text-center"
         >
-          <h1>
+          <h2>
             <Badge bg="secondary"> {news.source.title}</Badge>
-          </h1>
+          </h2>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

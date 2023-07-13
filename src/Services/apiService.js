@@ -3,11 +3,11 @@ const apiUrl = "http://eventregistry.org/api/v1";
 const apiKey = process.env.REACT_APP_API_KEY;
 
 export const defaultData = {
-  keyword: "Harry Styles",
+  keyword: "Estonia",
   resultType: "articles",
   articlesSortBy: "date",
-  dataType: "news",
-  lang: "eng",
+  dataType: ["news"],
+  lang: ["rus"],
   dateStart: "2023-06-01",
 };
 export const clearData = {

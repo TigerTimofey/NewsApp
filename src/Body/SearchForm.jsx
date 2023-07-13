@@ -192,7 +192,7 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
             onClick={handleClear}
             type="submit"
             variant="danger"
-            className="w-100 me-1"
+            className="w-300 me-1"
           >
             Clear
           </Button>
