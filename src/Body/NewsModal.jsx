@@ -1,7 +1,9 @@
 import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
 import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import moment from "moment";
 
 function NewsModal({ handleClose, news }) {
   return (
@@ -23,22 +25,24 @@ function NewsModal({ handleClose, news }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Container className=" text-center">
+        <Container className=" text-center LoraFontArticles">
           <h4 className="text-truncate">{news.title}</h4>
           <br />
-          <h6>{news.dateTimePub}</h6>
+          <h6> {moment(news.dateTimePub).format("DD.MM.YYYY")}</h6>
           <Image src={news?.image} fluid />
           <br />
           <br />
-          <div>
+        </Container>
+        <p className="border border-secondary p-3 mb-2 LoraFontArticles">
+          {news.body}
+        </p>
+        <Container className=" text-center LoraFontArticles">
+          <Button variant="outline-light">
             <a href={news.url} target="blank" rel="norefferer">
               {news.source.uri}
             </a>
-          </div>
-
-          <br />
+          </Button>
         </Container>
-        <p className="border border-secondary p-3 mb-2">{news.body}</p>
       </Modal.Body>
     </Modal>
   );
