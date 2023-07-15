@@ -5,7 +5,7 @@ const apiUrl = "http://eventregistry.org/api/v1";
 const apiKey = process.env.REACT_APP_API_KEY;
 
 export const defaultData = {
-  keyword: "Estonia",
+  keyword: "Tallinn",
   resultType: "articles",
   articlesSortBy: "date",
   dataType: ["news"],

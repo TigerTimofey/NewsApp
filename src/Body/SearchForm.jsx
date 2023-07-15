@@ -3,8 +3,17 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { getArticles } from "../Services/apiService";
 import Container from "react-bootstrap/Container";
+// import ErrorModal from "../ErrorModal";
 
-function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
+function SearchForm({
+  handleClose,
+  sumbitData,
+  setSumbitData,
+  handleClear,
+  // errorMessage,
+  setErrorMessage,
+  setNewsList,
+}) {
   const [articlesSortDisabled, setArticlesSortDisabled] = useState(false);
 
   const resultType = [
@@ -66,9 +75,15 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
     setSumbitData(data);
     console.log("data", data);
 
-    getArticles(data).then((res) => console.log("res", res));
+    getArticles(data)
+      .then((res) => {
+        handleClose();
+        setNewsList(res.articles.results);
+      })
 
-    handleClose();
+      .catch((error) => {
+        setErrorMessage(error.toString());
+      });
   };
   const handleResultTypeChange = (event) => {
     if (event.target.value !== "articles") {
@@ -105,103 +120,111 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
   //   };
 
   return (
-    <Form onSubmit={handleSumbit}>
-      <Form.Group className="mb-3">
-        <Form.Label>Keywords</Form.Label>
-        <Form.Control
-          type="text"
-          name="keyword"
-          defaultValue={sumbitData?.keyword}
-        />
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Result type</Form.Label>
-        <Form.Select
-          className="mb-3"
-          name="resultType"
-          onChange={handleResultTypeChange}
-          defaultValue={sumbitData?.resultType}
-        >
-          {resultType.map((type) => (
-            <option value={type} key={type}>
-              {type}
-            </option>
-          ))}
-        </Form.Select>
-
-        <Form.Label>Arcticles sort by</Form.Label>
-        <Form.Select
-          className="mb-3"
-          name="articlesSortBy"
-          disabled={articlesSortDisabled}
-          defaultValue={sumbitData?.articlesSortBy}
-        >
-          {articlesSortBy.map((type) => (
-            <option value={type} key={type}>
-              {type}
-            </option>
-          ))}
-        </Form.Select>
-
+    <>
+      <Form onSubmit={handleSumbit}>
         <Form.Group className="mb-3">
-          <Form.Label>Date start</Form.Label>
+          <Form.Label>Keywords</Form.Label>
           <Form.Control
-            type="date"
-            name="dateStart"
-            defaultValue={sumbitData?.dateStart}
+            type="text"
+            name="keyword"
+            defaultValue={sumbitData?.keyword}
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Date end</Form.Label>
-          <Form.Control
-            type="date"
-            name="dateEnd"
-            defaultValue={sumbitData?.dateEnd}
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Data type</Form.Label>
-          {dataType.map((type) => (
-            <Form.Check
-              value={type}
-              type="checkbox"
-              defaultChecked={sumbitData?.dataType.includes(type)}
-              label={type}
-              key={type}
-              name="dataType"
-            ></Form.Check>
-          ))}
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Language</Form.Label>
-          <Form.Select name="lang" multiple defaultValue={sumbitData?.lang}>
-            {languages.map(({ value, label }) => (
-              <option value={value} key={value}>
-                {label}
+        <Form.Group>
+          <Form.Label>Result type</Form.Label>
+          <Form.Select
+            className="mb-3"
+            name="resultType"
+            onChange={handleResultTypeChange}
+            defaultValue={sumbitData?.resultType}
+          >
+            {resultType.map((type) => (
+              <option value={type} key={type}>
+                {type}
               </option>
             ))}
           </Form.Select>
-        </Form.Group>
 
-        <Container className="d-flex justify-content-end align-items-center">
-          <Button
-            onClick={handleClear}
-            type="submit"
-            variant="danger"
-            className="w-300 me-1"
+          <Form.Label>Arcticles sort by</Form.Label>
+          <Form.Select
+            className="mb-3"
+            name="articlesSortBy"
+            disabled={articlesSortDisabled}
+            defaultValue={sumbitData?.articlesSortBy}
           >
-            Clear
-          </Button>
-          <Button type="submit" variant="success" className="w-100 ms-1">
-            Search
-          </Button>
-        </Container>
-      </Form.Group>
-    </Form>
+            {articlesSortBy.map((type) => (
+              <option value={type} key={type}>
+                {type}
+              </option>
+            ))}
+          </Form.Select>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Date start</Form.Label>
+            <Form.Control
+              type="date"
+              name="dateStart"
+              defaultValue={sumbitData?.dateStart}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Date end</Form.Label>
+            <Form.Control
+              type="date"
+              name="dateEnd"
+              defaultValue={sumbitData?.dateEnd}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Data type</Form.Label>
+            {dataType.map((type) => (
+              <Form.Check
+                value={type}
+                type="checkbox"
+                defaultChecked={sumbitData?.dataType.includes(type)}
+                label={type}
+                key={type}
+                name="dataType"
+              ></Form.Check>
+            ))}
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Language</Form.Label>
+            <Form.Select
+              name="lang"
+              multiple
+              required
+              defaultValue={sumbitData?.lang}
+            >
+              {languages.map(({ value, label }) => (
+                <option value={value} key={value}>
+                  {label}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+
+          <Container className="d-flex justify-content-end align-items-center">
+            <Button
+              onClick={handleClear}
+              type="submit"
+              variant="danger"
+              className="w-300 me-1"
+            >
+              Clear
+            </Button>
+            <Button type="submit" variant="success" className="w-100 ms-1">
+              Search
+            </Button>
+          </Container>
+        </Form.Group>
+      </Form>
+      {/* <ErrorModal errorMessage={errorMessage} /> */}
+    </>
   );
 }
 export default SearchForm;

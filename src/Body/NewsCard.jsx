@@ -25,7 +25,7 @@ function NewsCard({ news }) {
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">
-            {moment(news.dateTimePub).format("DD.MM.YYYY HH:mm")}
+            {moment(news.dateTimePub).format("DD MMMM YYYY HH:mm")}
           </small>
         </Card.Footer>
       </Card>

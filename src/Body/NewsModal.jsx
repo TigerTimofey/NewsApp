@@ -28,7 +28,7 @@ function NewsModal({ handleClose, news }) {
         <Container className=" text-center LoraFontArticles">
           <h4 className="text-truncate">{news.title}</h4>
           <br />
-          <h6> {moment(news.dateTimePub).format("DD.MM.YYYY")}</h6>
+          <h6> {moment(news.dateTimePub).format("DD MMMM YYYY")}</h6>
           <Image src={news?.image} fluid />
           <br />
           <br />
