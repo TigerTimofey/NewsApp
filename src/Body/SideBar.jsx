@@ -5,7 +5,7 @@ import SearchForm from "./SearchForm";
 import Container from "react-bootstrap/Container";
 import { clearData, defaultData } from "../Services/apiService";
 
-function SideBar({ setNewsList }) {
+function SideBar({ setNewsList, setInfo }) {
   const [show, setShow] = useState(false);
   const [sumbitData, setSumbitData] = useState(defaultData);
 
@@ -39,6 +39,7 @@ function SideBar({ setNewsList }) {
             sumbitData={sumbitData}
             setSumbitData={setSumbitData}
             handleClear={handleClear}
+            setInfo={setInfo}
           />
         </Offcanvas.Body>
       </Offcanvas>

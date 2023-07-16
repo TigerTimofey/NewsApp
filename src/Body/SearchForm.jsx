@@ -3,16 +3,15 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { getArticles } from "../Services/apiService";
 import Container from "react-bootstrap/Container";
-// import ErrorModal from "../ErrorModal";
 
 function SearchForm({
   handleClose,
   sumbitData,
   setSumbitData,
   handleClear,
-  // errorMessage,
   setErrorMessage,
   setNewsList,
+  setInfo,
 }) {
   const [articlesSortDisabled, setArticlesSortDisabled] = useState(false);
 
@@ -76,11 +75,11 @@ function SearchForm({
     console.log("data", data);
 
     getArticles(data)
-      .then((res) => {
+      .then(({ articles, info }) => {
+        articles && setNewsList(articles.results);
+        info ? setInfo(info) : setInfo(null);
         handleClose();
-        setNewsList(res.articles.results);
       })
-
       .catch((error) => {
         setErrorMessage(error.toString());
       });
@@ -223,7 +222,6 @@ function SearchForm({
           </Container>
         </Form.Group>
       </Form>
-      {/* <ErrorModal errorMessage={errorMessage} /> */}
     </>
   );
 }
