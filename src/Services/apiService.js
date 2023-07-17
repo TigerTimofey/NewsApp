@@ -12,6 +12,7 @@ export const defaultData = {
   lang: ["rus"],
   dateStart: moment().subtract(1, "months").format("YYYY-MM-DD"),
   dateEnd: moment().format("YYYY-MM-DD"),
+  articlesCount: 8,
 };
 export const clearData = {
   keyword: "",
@@ -23,9 +24,10 @@ export const clearData = {
   dateEnd: "",
 };
 
-export async function getArticles(params = null) {
+export async function getArticles(params = {}) {
   const urlParams = new URLSearchParams({
-    ...(params || defaultData),
+    ...defaultData,
+    ...params,
     apiKey,
   });
   const response = await fetch(`${apiUrl}/article/getArticles?${urlParams}`);
