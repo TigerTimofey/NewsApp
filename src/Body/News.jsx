@@ -31,6 +31,7 @@ function News({ newsList, setNewsList, info, setInfo }) {
           dataLength={newsList?.length}
           next={() => setPage(page + 1)}
           hasMore
+          scrollThreshold={1}
           loader={
             <div className="d-flex justify-content-center align-items-center wh-100">
               <Spinner animation="grow" size="sm" />
