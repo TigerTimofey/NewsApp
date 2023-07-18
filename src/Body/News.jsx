@@ -31,7 +31,11 @@ function News({ newsList, setNewsList, info, setInfo }) {
           dataLength={newsList?.length}
           next={() => setPage(page + 1)}
           hasMore
-          loader={<Spinner animation="grow" size="sm" />}
+          loader={
+            <div className="d-flex justify-content-center align-items-center wh-100">
+              <Spinner animation="grow" size="sm" />
+            </div>
+          }
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>Yay! You have seen it all</b>
