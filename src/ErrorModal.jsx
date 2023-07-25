@@ -23,7 +23,7 @@ function ErrorModal({ handleClose, errorMessage }) {
           }}
         >
           <img
-            className="my-4 mx-"
+            className="my-4 mx-2"
             src="./source.gif"
             style={{ width: "200px" }}
             alt="sadPaperclip"

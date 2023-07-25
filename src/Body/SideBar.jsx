@@ -5,7 +5,7 @@ import SearchForm from "./SearchForm";
 import Container from "react-bootstrap/Container";
 import { clearData, defaultData } from "../Services/apiService";
 
-function SideBar({ setNewsList, setInfo }) {
+function SideBar({ setDataList, setInfo }) {
   const [show, setShow] = useState(false);
   const [sumbitData, setSumbitData] = useState(defaultData);
 
@@ -21,10 +21,10 @@ function SideBar({ setNewsList, setInfo }) {
       <Container className="sticky-top d-flex justify-content-end align-items-center">
         <Button
           variant="secondary"
-          className="mb-3 mt-2 w-10"
+          className="mb-3 mx-auto mt-3 w-10 MenuFontRegular"
           onClick={handleShow}
         >
-          Search
+          🔎 Search
         </Button>
       </Container>
 
@@ -47,7 +47,7 @@ function SideBar({ setNewsList, setInfo }) {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <SearchForm
-            setNewsList={setNewsList}
+            setNewsList={setDataList}
             handleClose={handleClose}
             sumbitData={sumbitData}
             setSumbitData={setSumbitData}

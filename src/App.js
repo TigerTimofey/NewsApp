@@ -7,7 +7,7 @@ function App() {
   return (
     <Container>
       <Header />
-      <Body />{" "}
+      <Body />
     </Container>
   );
 }

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { getArticles } from "../Services/apiService";
 import Container from "react-bootstrap/Container";
+
+import { getArticles } from "../Services/apiService";
 
 function SearchForm({
   handleClose,
@@ -10,7 +11,7 @@ function SearchForm({
   setSumbitData,
   handleClear,
   setErrorMessage,
-  setNewsList,
+  setDataList,
   setInfo,
 }) {
   const [articlesSortDisabled, setArticlesSortDisabled] = useState(false);
@@ -62,12 +63,8 @@ function SearchForm({
       keyword: event.target.keyword.value,
       resultType: event.target.resultType.value,
       articlesSortBy: event.target.articlesSortBy.value,
-      dataType: [...event.target.dataType]
-        .filter((e) => e.checked)
-        .map((d) => d.value),
-      lang: [...event.target.lang]
-        .filter((e) => e.selected)
-        .map((d) => d.value),
+      dataType: event.target.dataType.value,
+      lang: event.target.lang.value,
       dateStart: event.target.dateStart.value,
       dateEnd: event.target.dateEnd.value,
     };
@@ -76,7 +73,7 @@ function SearchForm({
 
     getArticles(data)
       .then(({ articles, info }) => {
-        articles && setNewsList(articles.results);
+        articles && setDataList(articles.results);
         info ? setInfo(info) : setInfo(null);
         handleClose();
       })
@@ -182,7 +179,7 @@ function SearchForm({
             {dataType.map((type) => (
               <Form.Check
                 value={type}
-                type="checkbox"
+                type="radio"
                 defaultChecked={sumbitData?.dataType.includes(type)}
                 label={type}
                 key={type}
@@ -193,12 +190,7 @@ function SearchForm({
 
           <Form.Group className="mb-3">
             <Form.Label>Language</Form.Label>
-            <Form.Select
-              name="lang"
-              multiple
-              required
-              defaultValue={sumbitData?.lang}
-            >
+            <Form.Select name="lang" required defaultValue={sumbitData?.lang}>
               {languages.map(({ value, label }) => (
                 <option value={value} key={value}>
                   {label}

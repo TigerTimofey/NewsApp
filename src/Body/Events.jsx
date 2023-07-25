@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { getArticles } from "../Services/apiService";
+import { getEvents } from "../Services/apiService";
+
 import ErrorModal from "../ErrorModal";
 import DataList from "./DataList";
 
-function News({ dataList, info, setInfo, setDataList }) {
+function Events({ dataList, setDataList, info, setInfo }) {
   const [errorMessage, setErrorMessage] = useState(null);
-  const { keyword } = useParams();
   const [page, setPage] = useState(1);
+  const { keyword } = useParams();
 
   useEffect(() => {
-    getArticles({
+    getEvents({
+      resultType: "events",
       articlesPage: page,
       ...(keyword ? { keyword } : {}),
     })
-      .then(({ articles, info }) => {
-        articles && setDataList([...(dataList || []), ...articles.results]);
+      .then(({ events, info }) => {
+        events && setDataList([...(dataList || []), ...events.results]);
         info ? setInfo(info) : setInfo(null);
       })
       .catch((error) => {
@@ -27,14 +29,13 @@ function News({ dataList, info, setInfo, setDataList }) {
   return (
     <>
       <DataList page={page} setPage={setPage} info={info} dataList={dataList} />
-      {/* 
       {/* {info && (
         <Alert className="my-3" variant="info">
           {info}
-        </Alert> */}{" "}
+        </Alert> */}
       {errorMessage && <ErrorModal errorMessage={errorMessage} />}
     </>
   );
 }
 
-export default News;
+export default Events;
