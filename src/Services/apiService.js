@@ -17,21 +17,21 @@ const handleResponse = async (get) => {
 };
 
 export const eventsData = {
-  keyword: "JavaScript",
+  keyword: "Estonia",
   resultType: "events",
   eventsSortBy: "date",
   dataType: "news",
-  lang: "eng",
+  lang: "rus",
   dateStart: moment().subtract(1, "months").format("YYYY-MM-DD"),
   dateEnd: moment().format("YYYY-MM-DD"),
   articlesCount: 8,
 };
 export const defaultData = {
-  keyword: "Estonia",
+  keyword: "Github",
   resultType: "articles",
   articlesSortBy: "date",
   dataType: "news",
-  lang: "eng",
+  lang: "rus",
   dateStart: moment().subtract(1, "months").format("YYYY-MM-DD"),
   dateEnd: moment().format("YYYY-MM-DD"),
   articlesCount: 8,
