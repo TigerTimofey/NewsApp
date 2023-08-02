@@ -1,6 +1,12 @@
 import Alert from "react-bootstrap/Alert";
+import { setErrorMessage } from "./Services/stateService";
+import { useSelector, useDispatch } from "react-redux";
 
-function ErrorModal({ handleClose, errorMessage }) {
+function ErrorModal() {
+  const errorMessage = useSelector((state) => state.errorMessage);
+  const dispatch = useDispatch();
+  const handleClose = () => dispatch(setErrorMessage(null));
+
   return (
     <Alert
       style={{

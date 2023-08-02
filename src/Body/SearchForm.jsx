@@ -3,17 +3,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
-import { getArticles } from "../Services/apiService";
+import { setSearchData, setDataList } from "../Services/stateService";
+import { useDispatch } from "react-redux";
 
-function SearchForm({
-  handleClose,
-  sumbitData,
-  setSumbitData,
-  handleClear,
-  setErrorMessage,
-  setDataList,
-  setInfo,
-}) {
+function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
+  const dispatch = useDispatch();
   const [articlesSortDisabled, setArticlesSortDisabled] = useState(false);
 
   const resultType = [
@@ -71,15 +65,9 @@ function SearchForm({
     setSumbitData(data);
     console.log("data", data);
 
-    getArticles(data)
-      .then(({ articles, info }) => {
-        articles && setDataList(articles.results);
-        info ? setInfo(info) : setInfo(null);
-        handleClose();
-      })
-      .catch((error) => {
-        setErrorMessage(error.toString());
-      });
+    dispatch(setSearchData(data));
+    dispatch(setDataList(null));
+    handleClose();
   };
   const handleResultTypeChange = (event) => {
     if (event.target.value !== "articles") {
