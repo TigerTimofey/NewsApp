@@ -4,10 +4,12 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
 import { setSearchData, setDataList } from "../Services/stateService";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { defaultData } from "../Services/apiService";
 
-function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
+function SearchForm({ handleClose }) {
   const dispatch = useDispatch();
+  const searchData = useSelector((state) => state.searchData);
   const [articlesSortDisabled, setArticlesSortDisabled] = useState(false);
 
   const resultType = [
@@ -62,8 +64,6 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
       dateStart: event.target.dateStart.value,
       dateEnd: event.target.dateEnd.value,
     };
-    setSumbitData(data);
-    console.log("data", data);
 
     dispatch(setSearchData(data));
     dispatch(setDataList(null));
@@ -77,31 +77,31 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
     }
   };
 
-  // const handleClearSearch = (event) => {
-  //   event.preventDefault();
+  const handleClearSearch = (event) => {
+    event.preventDefault();
 
-  //   const form = event.target.closest("form");
-  //   const inputs = form.getElementsByTagName("input");
-  //   const selects = form.getElementsByTagName("select");
-  //   const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    const form = event.target.closest("form");
+    const inputs = form.getElementsByTagName("input");
+    const selects = form.getElementsByTagName("select");
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
 
-  //   for (let i = 0; i < inputs.length; i++) {
-  //     const input = inputs[i];
-  //     if (input.type !== "submit") {
-  //       input.value = "";
-  //     }
-  //   }
+    for (let i = 0; i < inputs.length; i++) {
+      const input = inputs[i];
+      if (input.type !== "submit") {
+        input.value = "";
+      }
+    }
 
-  //   for (let i = 0; i < selects.length; i++) {
-  //     const select = selects[i];
-  //     select.selectedIndex = 0;
-  //   }
+    for (let i = 0; i < selects.length; i++) {
+      const select = selects[i];
+      select.selectedIndex = 0;
+    }
 
-  //   for (let i = 0; i < checkboxes.length; i++) {
-  //     const checkbox = checkboxes[i];
-  //     checkbox.checked = false;
-  //   }
-  // };
+    for (let i = 0; i < checkboxes.length; i++) {
+      const checkbox = checkboxes[i];
+      checkbox.checked = false;
+    }
+  };
 
   return (
     <>
@@ -111,7 +111,7 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
           <Form.Control
             type="text"
             name="keyword"
-            defaultValue={sumbitData?.keyword}
+            defaultValue={searchData?.keyword || defaultData.keyword}
           />
         </Form.Group>
 
@@ -121,7 +121,7 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
             className="mb-3"
             name="resultType"
             onChange={handleResultTypeChange}
-            defaultValue={sumbitData?.resultType}
+            defaultValue={searchData?.resultType || defaultData.resultType}
           >
             {resultType.map((type) => (
               <option value={type} key={type}>
@@ -135,7 +135,9 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
             className="mb-3"
             name="articlesSortBy"
             disabled={articlesSortDisabled}
-            defaultValue={sumbitData?.articlesSortBy}
+            defaultValue={
+              searchData?.articlesSortBy || defaultData.articlesSortBy
+            }
           >
             {articlesSortBy.map((type) => (
               <option value={type} key={type}>
@@ -149,7 +151,7 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
             <Form.Control
               type="date"
               name="dateStart"
-              defaultValue={sumbitData?.dateStart}
+              defaultValue={searchData?.dateStart || defaultData.dateStart}
             />
           </Form.Group>
 
@@ -158,7 +160,7 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
             <Form.Control
               type="date"
               name="dateEnd"
-              defaultValue={sumbitData?.dateEnd}
+              defaultValue={searchData?.dateEnd || defaultData.dateEnd}
             />
           </Form.Group>
 
@@ -168,7 +170,10 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
               <Form.Check
                 value={type}
                 type="radio"
-                defaultChecked={sumbitData?.dataType.includes(type)}
+                defaultChecked={
+                  searchData.dataType?.includes(type) ||
+                  defaultData.dataType?.includes(type)
+                }
                 label={type}
                 key={type}
                 name="dataType"
@@ -178,7 +183,11 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
 
           <Form.Group className="mb-3">
             <Form.Label>Language</Form.Label>
-            <Form.Select name="lang" required defaultValue={sumbitData?.lang}>
+            <Form.Select
+              name="lang"
+              required
+              defaultValue={searchData?.lang || defaultData.lang}
+            >
               {languages.map(({ value, label }) => (
                 <option value={value} key={value}>
                   {label}
@@ -189,8 +198,7 @@ function SearchForm({ handleClose, sumbitData, setSumbitData, handleClear }) {
 
           <Container className="d-flex justify-content-end align-items-center">
             <Button
-              // onClick={handleClearSearch}
-              onClick={handleClear}
+              onClick={handleClearSearch}
               type="submit"
               variant="danger"
               className="w-300 me-1"

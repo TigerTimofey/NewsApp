@@ -36,15 +36,6 @@ export const defaultData = {
   dateEnd: moment().format("YYYY-MM-DD"),
   articlesCount: 8,
 };
-export const clearData = {
-  keyword: "",
-  resultType: "",
-  articlesSortBy: "",
-  dataType: [""],
-  lang: [""],
-  dateStart: "",
-  dateEnd: "",
-};
 export async function getEvents(params = {}) {
   return handleResponse(() => {
     const urlParams = new URLSearchParams({

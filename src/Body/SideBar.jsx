@@ -3,18 +3,12 @@ import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import SearchForm from "./SearchForm";
 import Container from "react-bootstrap/Container";
-import { clearData, defaultData } from "../Services/apiService";
 
 function SideBar() {
   const [show, setShow] = useState(false);
-  const [sumbitData, setSumbitData] = useState(defaultData);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleClear = (event) => {
-    event.preventDefault();
-    setSumbitData(clearData);
-  };
 
   return (
     <>
@@ -46,12 +40,7 @@ function SideBar() {
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <SearchForm
-            handleClose={handleClose}
-            sumbitData={sumbitData}
-            setSumbitData={setSumbitData}
-            handleClear={handleClear}
-          />
+          <SearchForm handleClose={handleClose} />
         </Offcanvas.Body>
       </Offcanvas>
     </>
