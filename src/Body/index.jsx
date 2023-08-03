@@ -23,10 +23,13 @@ function Body() {
     <>
       <SideBar />
       <Routes>
-        <Route path="/" element={<News {...props} />} />
-        <Route path="/:keyword" element={<News {...props} />} />
-        <Route path="/events" element={<Events {...props} />} />
-        <Route path="/events/:keyword" element={<Events {...props} />} />
+        <Route path="/NewsApp" element={<News {...props} />} />
+        <Route path="/NewsApp/:keyword" element={<News {...props} />} />
+        <Route path="/NewsApp/events" element={<Events {...props} />} />
+        <Route
+          path="/NewsApp/events/:keyword"
+          element={<Events {...props} />}
+        />
       </Routes>
 
       <div className="ScrollToTop">

@@ -10,9 +10,9 @@ function Header() {
       <Navbar bg="secondary" className="sticky-top" data-bs-theme="dark">
         <Container>
           <Nav className=" MenuFontRegular">
-            <Link className=" mx-auto nav-link logoFontStyle" to="/">
+            <Link className=" mx-auto nav-link logoFontStyle" to="/NewsApp">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
+                xmlns="https://www.w3.org/2000/svg"
                 width="25"
                 height="25"
                 fill="white"
@@ -24,21 +24,21 @@ function Header() {
               Paperclip
             </Link>
 
-            <Link className="nav-link  mt-1" to="/">
+            <Link className="nav-link  mt-1" to="/NewsApp">
               News
             </Link>
-            <Link className="nav-link  mt-1" to="/events">
+            <Link className="nav-link  mt-1" to="/NewsApp/events">
               Wiki Events
             </Link>
-            <Link className="nav-link mt-1" to="/events/Barak Obama">
+            {/* <Link className="nav-link mt-1" to="/NewsApp/events/Barak Obama">
               Barak Obama Events
             </Link>
-            <Link className="nav-link mt-1" to="/events/Elon Musk">
+            <Link className="nav-link mt-1" to="/NewsApp/events/Elon Musk">
               Elon Musk Events
             </Link>
-            <Link className="nav-link mt-1" to="/Barak Obama">
+            <Link className="nav-link mt-1" to="/NewsApp/Barak Obama">
               Barak Obama News
-            </Link>
+            </Link> */}
           </Nav>
         </Container>
       </Navbar>

@@ -15,7 +15,7 @@ function SideBar() {
       <Container className="sticky-top d-flex justify-content-end align-items-center">
         <Button
           variant="secondary"
-          className="mb-3 mx-auto mt-3 w-10 MenuFontRegular"
+          className="mb-3 my-auto mt-3 w-100 MenuFontRegular"
           onClick={handleShow}
         >
           🔎 Search
@@ -27,7 +27,7 @@ function SideBar() {
           <Offcanvas.Title>
             {" "}
             <svg
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="www.w3.org/2000/svg"
               width="25"
               height="25"
               fill="black"
