@@ -16,9 +16,8 @@ function DataCard({ data }) {
             <b>Author: </b> {author.name} <br />
           </span>
         ))
-      : null,
-    //   : data.summary[Object.keys(data.summary)[0]],
-    // footer: moment(data.dateTimePub || data.eventDate).format("DD MMMM YYYY"),
+      : data.summary[Object.keys(data.summary)[0]],
+    footer: moment(data.dateTimePub || data.eventDate).format("DD MMMM YYYY"),
   };
 
   return (

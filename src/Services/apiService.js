@@ -21,18 +21,18 @@ export const eventsData = {
   resultType: "events",
   eventsSortBy: "date",
   dataType: "news",
-  lang: "rus",
+  lang: "est",
   dateStart: moment().subtract(1, "months").format("YYYY-MM-DD"),
   dateEnd: moment().format("YYYY-MM-DD"),
   articlesCount: 8,
 };
 export const defaultData = {
-  keyword: "Github",
+  keyword: "Estonia",
   resultType: "articles",
   articlesSortBy: "date",
   dataType: "news",
   lang: "rus",
-  dateStart: moment().subtract(1, "months").format("YYYY-MM-DD"),
+  dateStart: moment().subtract(2, "months").format("YYYY-MM-DD"),
   dateEnd: moment().format("YYYY-MM-DD"),
   articlesCount: 8,
 };
