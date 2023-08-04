@@ -1,3 +1,4 @@
+import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 import { setErrorMessage } from "./Services/stateService";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,21 +21,15 @@ function ErrorModal() {
       dismissible
     >
       <Alert.Heading>
-        Oh snap! Something goes wrong!
+        <h6>Loading...</h6>
+        <Spinner animation="border" variant="secondary" className="ms-3" />
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
-        >
-          <img
-            className="my-4 mx-2"
-            src="./source.gif"
-            style={{ width: "200px" }}
-            alt="sadPaperclip"
-          />
-        </div>
+        ></div>
       </Alert.Heading>
       <br />
       <p>{errorMessage}</p>
