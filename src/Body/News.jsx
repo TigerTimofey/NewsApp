@@ -10,7 +10,7 @@ function News({ info, setInfo }) {
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.searchData);
 
-  const [dataList, setDataList] = useState(null);
+  const [dataList, setDataList] = useState([]);
   const { keyword } = useParams();
   const [page, setPage] = useState(1);
 
@@ -22,9 +22,7 @@ function News({ info, setInfo }) {
     })
       .then(({ articles, info }) => {
         articles &&
-          setDataList(
-            dataList ? [...dataList, ...articles.results] : articles.results
-          );
+          setDataList((prevDataList) => [...prevDataList, ...articles.results]);
         info ? setInfo(info) : setInfo(null);
       })
       .catch((error) => {

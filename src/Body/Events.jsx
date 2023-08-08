@@ -12,7 +12,7 @@ function Events({ info, setInfo }) {
   const searchData = useSelector((state) => state.searchData);
   const dispatch = useDispatch();
 
-  const [dataList, setDataList] = useState(null);
+  const [dataList, setDataList] = useState([]);
   const [page, setPage] = useState(1);
   const { keyword } = useParams();
 
@@ -25,9 +25,7 @@ function Events({ info, setInfo }) {
     })
       .then(({ events, info }) => {
         events &&
-          setDataList(
-            dataList ? [...dataList, ...events.results] : events.results
-          );
+          setDataList((prevDataList) => [...prevDataList, ...events.results]);
         info ? setInfo(info) : setInfo(null);
       })
       .catch((error) => {
