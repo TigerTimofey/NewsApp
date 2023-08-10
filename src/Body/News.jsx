@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getArticles } from "../Services/apiService";
 import DataList from "./DataList";
 import { setErrorMessage } from "../Services/stateService";
-import { useDispatch, useSelector } from "react-redux";
+import { getArticles } from "../Services/apiService";
 
 function News({ info, setInfo }) {
   const dispatch = useDispatch();
-  const searchData = useSelector((state) => state.searchData);
+  const { keyword } = useParams();
 
   const [dataList, setDataList] = useState([]);
-  const { keyword } = useParams();
   const [page, setPage] = useState(1);
+
+  const searchData = useSelector((state) => state.searchData);
 
   useEffect(() => {
     getArticles({

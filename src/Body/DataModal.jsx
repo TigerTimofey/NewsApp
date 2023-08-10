@@ -2,6 +2,7 @@ import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
 import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
+
 import moment from "moment";
 
 const TitleNews = ({ dateTimePub }) => (
@@ -41,7 +42,6 @@ function truncateText(text, delimiter) {
 const BodyEvent = ({ summary, concepts }) => (
   <>
     <p className="border border-secondary p-3 ">
-      {/* {summary[Object.keys(summary)[0]]} */}
       {truncateText(summary[Object.keys(summary)[0]], ".")}
     </p>
     <Container className="text-center">

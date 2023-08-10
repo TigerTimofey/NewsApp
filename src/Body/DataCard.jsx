@@ -1,7 +1,9 @@
 import { useState } from "react";
+
+import moment from "moment";
+
 import Card from "react-bootstrap/Card";
 import DataModal from "./DataModal";
-import moment from "moment";
 
 function DataCard({ data }) {
   const [showModal, setShowModal] = useState(false);

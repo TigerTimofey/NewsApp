@@ -1,7 +1,9 @@
+import { useSelector, useDispatch } from "react-redux";
+
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
+
 import { setErrorMessage } from "./Services/stateService";
-import { useSelector, useDispatch } from "react-redux";
 
 function ErrorModal() {
   const errorMessage = useSelector((state) => state.errorMessage);

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
 import { Routes, Route } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+
 import News from "./News";
 import SideBar from "./SideBar";
 import Events from "./Events";

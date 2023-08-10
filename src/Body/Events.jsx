@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import { getEvents } from "../Services/apiService";
+import { useDispatch, useSelector } from "react-redux";
 
 import DataList from "./DataList";
 import { setErrorMessage } from "../Services/stateService";
-
-import { useDispatch, useSelector } from "react-redux";
+import { getEvents } from "../Services/apiService";
 
 function Events({ info, setInfo }) {
-  const searchData = useSelector((state) => state.searchData);
   const dispatch = useDispatch();
+
+  const { keyword } = useParams();
 
   const [dataList, setDataList] = useState([]);
   const [page, setPage] = useState(1);
-  const { keyword } = useParams();
+
+  const searchData = useSelector((state) => state.searchData);
 
   useEffect(() => {
     getEvents({

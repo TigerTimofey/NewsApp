@@ -30,15 +30,6 @@ function Header() {
             <Link className="nav-link  mt-1" to="/NewsApp/events">
               Wiki Events
             </Link>
-            {/* <Link className="nav-link mt-1" to="/NewsApp/events/Barak Obama">
-              Barak Obama Events
-            </Link>
-            <Link className="nav-link mt-1" to="/NewsApp/events/Elon Musk">
-              Elon Musk Events
-            </Link>
-            <Link className="nav-link mt-1" to="/NewsApp/Barak Obama">
-              Barak Obama News
-            </Link> */}
           </Nav>
         </Container>
       </Navbar>

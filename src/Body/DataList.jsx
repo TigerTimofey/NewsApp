@@ -1,8 +1,10 @@
 import Spinner from "react-bootstrap/Spinner";
-import InfiniteScroll from "react-infinite-scroll-component";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Alert from "react-bootstrap/Alert";
+
+import InfiniteScroll from "react-infinite-scroll-component";
+
 import DataCard from "./DataCard";
 function DataList({ info, dataList, setPage, page }) {
   return (
